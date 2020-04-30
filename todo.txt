@@ -1,0 +1,6 @@
+# liste de formation a parcourir ds l'ordre 
+ . alphom
+ . doc oficial
+ . BrightCoding .... 
+
+
