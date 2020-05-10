@@ -9,8 +9,8 @@ const user = {
 function Test01() {
     return (
        /* debut du code JSX  */
-        <section>
-            <h3> test 01 :   {formatName(user)}  </h3> {/* les { } permer d'executer du js dans des chaine JSX ... ( appler une function, operation math ... )  */}
+        <section className="Test01 test">
+            <h4> test 01 :  {formatName(user)}  </h4> {/* les { } permer d'executer du js dans des chaine JSX ... ( appler une function, operation math ... )  */}
         </section>
      /* Fin du code JSX  */
     );
