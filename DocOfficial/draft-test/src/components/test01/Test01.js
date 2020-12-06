@@ -1,12 +1,13 @@
 import React from 'react';
-function formatName(user) {
-    return 'salut   ' + user.firstName + ' ' + user.lastName;
-}
-const user = {
-    firstName: 'younes',
-    lastName: 'BATAL'
-};
+
 function Test01() {
+    const  formatName = (user) => {
+        return 'salam   ' + user.firstName + ' ' + user.lastName;
+    }
+    const user = {
+        firstName: 'younes',
+        lastName: 'BATAL'
+    };
     return (
        /* debut du code JSX  */
         <section className="Test01 test">

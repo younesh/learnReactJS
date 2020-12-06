@@ -13,7 +13,7 @@ class Clock extends React.Component {
   //Notez qu’on a enregistré l’ID du minuteur directement sur this (this.timerID).
  
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
+    this.timerID = setInterval(() => this.tick(), 2000);
   }
 
   //Nous allons détruire le minuteur dans la méthode de cycle de vie componentWillUnmount() :

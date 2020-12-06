@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
 /* new cpt  */
@@ -8,6 +7,10 @@ import  "./components/test01/Test01.scss";
 
 /* Clock :  test cycle de vie  */
 import Clock from "./components/Clock/Clock";
+
+/*  event management  */ 
+
+import EventManagement from "./components/eventManagment/eventManagement"; 
 
 class Welcome extends React.Component {
   render() {
@@ -27,8 +30,8 @@ function App() {
       <Welcome name="seeven" grade="adjudin safi" />
       <Bay name="thrump" />
       <Test01 />
-      
       <Clock />
+      <EventManagement langue="Fr" data={['item01', 'item02', 'item03']}/>
     </div>
   );
 }
