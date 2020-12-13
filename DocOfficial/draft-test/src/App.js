@@ -1,5 +1,6 @@
+
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.css";
+
 import "./App.scss";
 /* new cpt  */
 import  Test01 from  "./components/test01/Test01";
@@ -7,10 +8,16 @@ import  "./components/test01/Test01.scss";
 
 /* Clock :  test cycle de vie  */
 import Clock from "./components/Clock/Clock";
+import Contacts from "./components/contacts/Contacts";
+import AnimeList from "./components/anime/AnimeList";
 
+/* er importer le provider */
+import { ProviderContacts } from "./components/contacts/contextContact";
+import { ProviderAnime } from "./components/anime/AnimeContext";
+ 
 /*  event management  */ 
 
-import EventManagement from "./components/eventManagment/eventManagement"; 
+// import EventManagement from "./components/eventManagment/eventManagement"; 
 
 class Welcome extends React.Component {
   render() {
@@ -25,14 +32,28 @@ function Bay(props) {
 
 function App() {
   return (
-    <div className="App">
-      <h1> reactJS all tests ... </h1>
-      <Welcome name="seeven" grade="adjudin safi" />
-      <Bay name="thrump" />
-      <Test01 />
-      <Clock />
-      <EventManagement langue="Fr" data={['item01', 'item02', 'item03']}/>
-    </div>
+    <ProviderContacts >
+      <ProviderAnime>
+      <div className="App">
+        <h1> reactJS all tests ... </h1>
+        <Welcome name="seeven" grade="adjudin safi" />
+        <Bay name="thrump" />
+        <Test01 />
+        <Clock />
+        {/* <EventManagement langue="Fr" data={['item01', 'item02', 'item03']}/> */}
+        
+        <section className="test">
+          <AnimeList /> 
+        </section>
+
+        <section className="test">
+          <Contacts />
+        </section>
+
+      </div>
+      </ProviderAnime>
+    </ProviderContacts>
+
   );
 }
 

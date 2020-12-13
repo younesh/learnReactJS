@@ -1,7 +1,6 @@
- $gutter-base: 30px;
- $gutter-half: $gutter-base / 2; // calc($gutter-base / 2)
- section.test {
-     padding: $gutter-half;
-     border: solid 1px #ccc;
-     margin-bottom: $gutter-half;
- }
+@import './assets/styles/core';
+section.test {
+    padding: $gutter-half;
+    border: solid 1px #ccc;
+    margin-bottom: $gutter-half;
+}

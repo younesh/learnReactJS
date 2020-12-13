@@ -1,0 +1,14 @@
+@import '../../assets/styles/core';
+.anime {
+    border: 1px solid #ccc;
+    &__img {
+        width: 100%;
+        img {
+            min-width: 100%;
+        }
+    }
+    &__info {}
+    &__name {}
+}
+
+.anime-list {}

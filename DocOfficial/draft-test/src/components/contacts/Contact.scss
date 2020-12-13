@@ -1,0 +1,18 @@
+ @import '../../assets/styles/core';
+ .contact {
+     border-bottom: 1px solid #ccc;
+     // padding: $gutter-half;
+     // margin-bottom: $gutter-half;
+ }
+ 
+ .contact__info {
+     display: none;
+ }
+ 
+ .contact__info--open {
+     display: block;
+ }
+ 
+ .nav-contact {
+     @include boxExemple();
+ }
