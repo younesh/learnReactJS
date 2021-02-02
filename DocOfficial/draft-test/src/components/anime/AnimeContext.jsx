@@ -9,42 +9,22 @@ export  class ProviderAnime extends Component {
     super(props);
      console.log("why cionstruct !  ");
     //  this.resAnimes(); 
+
    }
 
- 
- state = {
-    animes : [
-        {
-        id : 1, 
-        name : "ryu ",
-        urlImg : "src/assets/akuma.jpg",
-        link : "http://github.com",
-       },
-       {
-        id : 2, 
-        name : "genkusen ...",
-        urlImg : "src/assets/akuma.jpg",
-        link : "http://github.com",
-       },
-       {
-        id : 3, 
-        name : "akuma",
-        urlImg : "src/assets/akuma.jpg",
-        link : "http://github.com",
-       }
- ]
-}
-
-
-
-    resAnimes =  async () =>{
-
+   state = {
+    animes : []
+   }
+      resAnimes =  async () =>{
         const response = await fetch("https://api.jikan.moe/v3/anime/1/characters_staff");
         const animeFetch  = await response.json();
-         console.log(animeFetch.staff);
-          return animeFetch.staff; 
+        this.setState({animes  :  animeFetch.staff});
       };
 
+
+      componentDidMount  ()  {
+           this.resAnimes();
+      }
 
     render() {
         return (

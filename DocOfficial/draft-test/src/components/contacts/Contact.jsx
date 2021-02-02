@@ -19,26 +19,32 @@ class Contact extends React.Component {
         })
     }
 
-    deleteClickChild (id) {
+    deleteClickChild (id, dispatch) {
         console.log("deleteClickChild click ");
+        dispatch({
+            type : "DELETE_CONTACT",
+            payload : id
+        });
     }
     render() {
-        const { id, nom, mail , tel } = this.props.user;
+        const { id, nom, mail , tel } = this.props.user; // atention !! >> props destructurée 
         const { showBlocInfo } = this.state;
         return (
             <Consumer>
-                { value => (
-                <div className="contact">
-                    <h3 onClick={this.showHideBlocInfo}> {nom} </h3> 
-                    {/* <div className={(showBlocInfo) ? "contact__info contact__info--open" : "contact__info" } > */}
-                    <div className= {`contact__info  ${(showBlocInfo) ? "contact__info--open" : ""}`} >
-                        <p> {mail} </p>
-                        <p> {tel} </p>
+                { value => {
+                    const {dispatch} = value;
+                    return (
+                        <div className="contact">
+                        <h3 onClick={this.showHideBlocInfo}> {nom} </h3> 
+                        {/* <div className={(showBlocInfo) ? "contact__info contact__info--open" : "contact__info" } > */}
+                        <div className= {`contact__info  ${(showBlocInfo) ? "contact__info--open" : ""}`} >
+                            <p> {mail} </p>
+                            <p> {tel} </p>
+                        </div>
+                        <button className="btn btn-danger" onClick={this.deleteClickChild.bind(this, id, dispatch)}> delette </button> {/* et01 */}
                     </div>
-                    <button className="btn btn-danger" onClick={this.deleteClickChild.bind(this, id)}> delette </button> {/* et01 */}
-                </div>
-
-                )}
+                    )
+                }}
             </Consumer>
         )
     }
