@@ -8,7 +8,9 @@ class Contacts extends Component {
 
 
     deleteFromParent = ( id ) => {
-        const  { contacts } = this.state; 
+         const  { contacts } = this.state; 
+        //const  { contacts } = Consumer.value; 
+        console.log(contacts);
         const  newListContact = contacts.filter((ct) => ct.id !== id )
         this.setState({
           contacts : newListContact

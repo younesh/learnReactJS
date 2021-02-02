@@ -21,8 +21,14 @@ export  class ProviderAnime extends Component {
         link : "http://github.com",
        },
        {
-        id : 1, 
+        id : 2, 
         name : "genkusen ...",
+        urlImg : "src/assets/akuma.jpg",
+        link : "http://github.com",
+       },
+       {
+        id : 3, 
+        name : "akuma",
         urlImg : "src/assets/akuma.jpg",
         link : "http://github.com",
        }

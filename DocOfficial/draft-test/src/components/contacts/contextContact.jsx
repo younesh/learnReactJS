@@ -2,25 +2,30 @@ import React, { Component } from 'react'
 
 const ContextContacts = React.createContext();  /* etap 00 :  en créer un context ! */
 
+const reducerContact = (state , action) => {
+    switch ( action.type ) {
+      
+    }
+}
 export  class ProviderContacts extends Component {  //  on enlvé le default car on v exporter plusieur chose ! 
 
     state = { /* etap 01 : copier le state contact ds le context ! ( avant le retour !  ) */
         contacts :   [
             { 
               id : 1,
-              nom : "maxyo",
+              nom : "maxyoooo",
               mail : "Gyann@hotmail",
               tel : 5623154652
             },
             { 
               id : 2,
-              nom : "kevinne",
+              nom : "kevinneeee",
               mail : "kglwn@firefo.com",
               tel : 123233212542132
             },
             { 
               id : 3,
-              nom : "maeikelo",
+              nom : "maeikelouuu",
               mail : "mmiki@gmail",
               tel : 5623154652
             },
