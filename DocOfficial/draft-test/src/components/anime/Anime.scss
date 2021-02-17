@@ -1,4 +1,13 @@
 @import '../../assets/styles/core';
+.anime-liste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    >* {
+        margin-top: $gutter-half;
+    }
+}
+
 .anime {
     border: 1px solid #ccc;
     &__img {

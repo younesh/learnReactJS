@@ -9,8 +9,8 @@ class AnimeList extends Component {
         return (
             <Consumer>
                 { value => (
-                    <div>
- {value.animes.map((item)=>(<Anime caracter={item} key={item.id} />))}
+                    <div className="anime-liste">
+                        {value.animes.map((item)=>(<Anime caracter={item} key={item.id} />))}
                     </div>
                   )
                 }

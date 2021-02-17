@@ -43,12 +43,13 @@ function App() {
         {/* <EventManagement langue="Fr" data={['item01', 'item02', 'item03']}/> */}
         
         <section className="test">
+          <Contacts />
+        </section>
+        
+        <section className="test">
           <AnimeList /> 
         </section>
 
-        <section className="test">
-          <Contacts />
-        </section>
 
       </div>
       </ProviderAnime>
