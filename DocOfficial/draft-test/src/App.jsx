@@ -9,11 +9,15 @@ import  "./components/test01/Test01.scss";
 /* Clock :  test cycle de vie  */
 import Clock from "./components/Clock/Clock";
 import Contacts from "./components/contacts/Contacts";
-import AnimeList from "./components/anime/AnimeList";
+import TestES6 from "./components/testEs6/TestES6";
+// import AnimeList from "./components/anime/AnimeList";
 
 /* er importer le provider */
 import { ProviderContacts } from "./components/contacts/contextContact";
 import { ProviderAnime } from "./components/anime/AnimeContext";
+
+
+import {BrowserRouter as Router,  Route, Switch} from "react-router-dom";
  
 /*  event management  */ 
 
@@ -34,24 +38,20 @@ function App() {
   return (
     <ProviderContacts >
       <ProviderAnime>
-      <div className="App">
-        <h1> reactJS all tests ... </h1>
-        <Welcome name="seeven" grade="adjudin safi" />
-        <Bay name="thrump" />
-        <Test01 />
-        <Clock />
-        {/* <EventManagement langue="Fr" data={['item01', 'item02', 'item03']}/> */}
-        
-        <section className="test">
-          <Contacts />
-        </section>
-        
-        <section className="test">
-          <AnimeList /> 
-        </section>
+        <Router>
+        <div className="App">
+          <h1> reactJS all tests ... </h1>
 
 
-      </div>
+          <Switch>
+          <Route exact path="/" component={Clock} />
+          <Route exact path="/contacts" component={Contacts} />
+          <Route exact path="/es6" component={Test01} />
+          </Switch>
+
+        </div>
+        </Router>
+
       </ProviderAnime>
     </ProviderContacts>
 
