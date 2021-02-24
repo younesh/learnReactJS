@@ -3,13 +3,15 @@ import React from 'react';
 
 import "./App.scss";
 /* new cpt  */
-import  Test01 from  "./components/test01/Test01";
+// import  Test01 from  "./components/test01/Test01";
 import  "./components/test01/Test01.scss";
 
 /* Clock :  test cycle de vie  */
 import Clock from "./components/Clock/Clock";
 import Contacts from "./components/contacts/Contacts";
 import TestES6 from "./components/testEs6/TestES6";
+import About from "./pages/About";
+
 // import AnimeList from "./components/anime/AnimeList";
 
 /* er importer le provider */
@@ -17,7 +19,7 @@ import { ProviderContacts } from "./components/contacts/contextContact";
 import { ProviderAnime } from "./components/anime/AnimeContext";
 
 
-import {BrowserRouter as Router,  Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router,  Route, Switch, Link} from "react-router-dom";
  
 /*  event management  */ 
 
@@ -38,15 +40,20 @@ function App() {
   return (
     <ProviderContacts >
       <ProviderAnime>
-        <Router>
+        <Router> {/* Router englobe tout le contenu de app !  */}
         <div className="App">
           <h1> reactJS all tests ... </h1>
+          <Link to="/" className=""> Clock </Link> |
+          <Link to="contacts"> Contacts </Link> |
+          <Link to="/es6"> TestES6 </Link>
+          <Link to="/page/about"> About </Link>
+ 
 
-
-          <Switch>
-          <Route exact path="/" component={Clock} />
-          <Route exact path="/contacts" component={Contacts} />
-          <Route exact path="/es6" component={Test01} />
+          <Switch> {/* Switch doit englober les routes qui pointe vers component  */}
+            <Route exact path="/" component={Clock} />
+            <Route exact path="/contacts" component={Contacts} />
+            <Route exact path="/es6" component={TestES6} />
+            <Route exact path="/page/about" component={About} />
           </Switch>
 
         </div>

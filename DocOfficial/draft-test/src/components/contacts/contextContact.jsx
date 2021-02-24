@@ -6,7 +6,7 @@ const reducerContact = (state , action) => {
     switch ( action.type ) {
       case "DELETE_CONTACT" : 
         return {
-          contacts : state.contacts.filter((contact)=> contact.id !== action.payload)
+          contacts : state.contacts.filter((contact)=> contact.id !== action.payload)  // 
         };
       default : 
         return state;
@@ -22,10 +22,10 @@ export  class ProviderContacts extends Component {  //  on enlvé le default car
               tel : 5623154652
             },
             { 
-              id : 2,
+              id : 2,  
               nom : "kevinneeee",
               mail : "kglwn@firefo.com",
-              tel : 123233212542132
+              tel : 1232322132
             },
             { 
               id : 3,
@@ -35,7 +35,7 @@ export  class ProviderContacts extends Component {  //  on enlvé le default car
             },
           ],
           dispatch : (action) => {
-              this.setState(state => reducerContact(state, action)); 
+             this.setState(state => reducerContact(state, action)); // il recevra un contact modifier
           } 
     }
     render() {

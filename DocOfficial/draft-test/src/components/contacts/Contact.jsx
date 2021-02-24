@@ -18,7 +18,7 @@ class Contact extends React.Component {
             showBlocInfo : !this.state.showBlocInfo
         })
     }
-
+    // function qui appelle le dispach qui modifira le state du context !!! 
     deleteClickChild (id, dispatch) {
         console.log("deleteClickChild click ");
         dispatch({
@@ -32,7 +32,7 @@ class Contact extends React.Component {
         return (
             <Consumer>
                 { value => {
-                    const {dispatch} = value;
+                    const {dispatch} = value; // destruct dispatch methode depuis le state du context !! 
                     return (
                         <div className="contact">
                         <h3 onClick={this.showHideBlocInfo}> {nom} </h3> 
