@@ -27,7 +27,7 @@ class Contact extends React.Component {
         });
     }
     render() {
-        const { id, nom, mail , tel } = this.props.user; // atention !! >> props destructurée 
+        const { id, name, mail , tel } = this.props.user; // atention !! >> props destructurée 
         const { showBlocInfo } = this.state;
         return (
             <Consumer>
@@ -35,7 +35,7 @@ class Contact extends React.Component {
                     const {dispatch} = value; // destruct dispatch methode depuis le state du context !! 
                     return (
                         <div className="contact">
-                        <h3 onClick={this.showHideBlocInfo}> {nom} </h3> 
+                        <h3 onClick={this.showHideBlocInfo}> {name} </h3> 
                         {/* <div className={(showBlocInfo) ? "contact__info contact__info--open" : "contact__info" } > */}
                         <div className= {`contact__info  ${(showBlocInfo) ? "contact__info--open" : ""}`} >
                             <p> {mail} </p>
@@ -58,7 +58,7 @@ Contact.propTypes = {
 Contact.defaultProps = {
     user : {
         id :  0,
-        nom : "defaultNom",
+        name : "defaultname",
         mail : "default@mail.com",
         tel : "0000000",
     }

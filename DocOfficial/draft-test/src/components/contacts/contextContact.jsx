@@ -8,6 +8,10 @@ const reducerContact = (state , action) => {
         return {
           contacts : state.contacts.filter((contact)=> contact.id !== action.payload)  // 
         };
+      case "ADD_CONTACT" : 
+        return {
+          contacts : [...state.contacts, action.payload]
+        };
       default : 
         return state;
     }
@@ -17,19 +21,19 @@ export  class ProviderContacts extends Component {  //  on enlvé le default car
         contacts :   [
             { 
               id : 1,
-              nom : "maxyoooo",
+              name : "maxyoooo",
               mail : "Gyann@hotmail",
               tel : 5623154652
             },
             { 
               id : 2,  
-              nom : "kevinneeee",
+              name : "kevinneeee",
               mail : "kglwn@firefo.com",
               tel : 1232322132
             },
             { 
               id : 3,
-              nom : "maeikelouuu",
+              name : "maeikelouuu",
               mail : "mmiki@gmail",
               tel : 5623154652
             },
