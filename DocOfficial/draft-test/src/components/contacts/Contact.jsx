@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 /* et01 : en import un Consumer */
 import { Consumer } from "./contextContact"; 
+import {Link} from "react-router-dom";
 import './Contact.scss'
 class Contact extends React.Component {
 
@@ -35,7 +36,7 @@ class Contact extends React.Component {
                     const {dispatch} = value; // destruct dispatch methode depuis le state du context !! 
                     return (
                         <div className="contact">
-                        <h3 onClick={this.showHideBlocInfo}> {name} </h3> 
+                  <Link to={"/page/contact-detail/" + id }> <h3 onClick={this.showHideBlocInfo}> {name} </h3></Link>
                         {/* <div className={(showBlocInfo) ? "contact__info contact__info--open" : "contact__info" } > */}
                         <div className= {`contact__info  ${(showBlocInfo) ? "contact__info--open" : ""}`} >
                             <p> {mail} </p>

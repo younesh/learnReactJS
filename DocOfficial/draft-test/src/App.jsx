@@ -11,6 +11,10 @@ import Clock from "./components/Clock/Clock";
 import Contacts from "./components/contacts/Contacts";
 import TestES6 from "./components/testEs6/TestES6";
 import About from "./pages/About";
+import SuccessAdd from "./pages/SuccessAdd";
+// 01 : importer la page 404
+import notFound from "./pages/notFound";
+import DetailContact from "./pages/DetailContact";
 
 // import AnimeList from "./components/anime/AnimeList";
 
@@ -18,7 +22,7 @@ import About from "./pages/About";
 import { ProviderContacts } from "./components/contacts/contextContact";
 import { ProviderAnime } from "./components/anime/AnimeContext";
 
-
+// le package react-router-dom : pour la gestion des route ds notre app 
 import {BrowserRouter as Router,  Route, Switch, Link} from "react-router-dom";
  
 /*  event management  */ 
@@ -42,18 +46,23 @@ function App() {
       <ProviderAnime>
         <Router> {/* Router englobe tout le contenu de app !  */}
         <div className="App">
-          <h1> reactJS all tests ... </h1>
-          <Link to="/" className=""> Clock </Link> |
-          <Link to="contacts"> Contacts </Link> |
+          {/* creation du menu avec Link */}
+          <Link to="/" className=""> Home </Link> |
           <Link to="/es6"> TestES6 </Link>
           <Link to="/page/about"> About </Link>
+          <Link to="/page/success"> Succes </Link>
  
 
           <Switch> {/* Switch doit englober les routes qui pointe vers component  */}
-            <Route exact path="/" component={Clock} />
-            <Route exact path="/contacts" component={Contacts} />
+           {/* liste des routes de l'app :  */}
+            <Route exact path="/" component={Contacts}/>
             <Route exact path="/es6" component={TestES6} />
             <Route exact path="/page/about" component={About} />
+            <Route exact path="/page/success" component={SuccessAdd} />
+            <Route exact path="/page/contact-detail/:id/" component={DetailContact} />
+
+            {/* 02 : ajouter la route 404 en dernier qui prend les url non définit avant et qui rederige vers la 404 ! */}
+            <Route component={notFound} />
           </Switch>
 
         </div>

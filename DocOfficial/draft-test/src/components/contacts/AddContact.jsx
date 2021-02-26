@@ -1,53 +1,56 @@
-import React , { useState, useRef} from 'react'
-import { Consumer } from "./contextContact"; 
+import React , { useState} from 'react'
+import { Consumer } from "./contextContact"
+import PropTypes from 'prop-types'
+// 01 : import useHistory du  package react-router-dom 
+import { useHistory } from "react-router-dom"
 
+function AddContact(props) {
 
-
-function AddContact() {
     const [user, setUser] = useState({
         id : 0,
-        name : "",
-        mail : "",
-        tel : "",
+        name : null,
+        mail : "le mail",
+        tel : "le tel ",
     });
 
-    /*  const inputName = useRef(null); 
-    const inputMail = useRef(null); 
-    const inputTel= useRef(null);  
-    
-              { 
-              id : 2,  
-              nom : "kevinneeee",
-              mail : "kglwn@firefo.com",
-              tel : 1232322132
-            },
-    */ 
+// 02 : en creer un objet history depuis useHistory
+let history = useHistory();
 
-    const updateInput = (e) => {
-        // tu lui reprend la meme state a linstant t, mais apres modifier la proporité du stat qui étet modifier là, en occurence la  [e.target.name] 
+
+    const updateInput = (e) => { // au onChange du input en maj le state !
         setUser({...user,  [e.target.name] : e.target.value});
-
     }
 
-    const addUser = (newUser, dispatch,  contacts, e ) => {
-        
+    // au submition du form en ajoute le user du state local dans le state du context !
+    const addUser = (newUser, dispatch,  contacts, e  ) => {
         e.preventDefault(); 
-        console.log("newUser >> " , newUser);
-        console.log("dispatch >> " , dispatch);
-        newUser = {...newUser, id : contacts.length + 1 }
-        dispatch({
-            type : "ADD_CONTACT",
-            payload : newUser
-        });
+        newUser = {...newUser, id: contacts.length + 1 }
+        const {name,mail, tel  } = newUser
+        if (newUser!=="" && mail !=="" && tel !== "" ) {
+            dispatch({
+                type : "ADD_CONTACT",
+                payload : newUser
+            });
+           // this.props.history.push("/page/success");
+           //  withRouter.history.push("/page/success");
+           // 03 :  en execute notre redirection a la vollé !! 
+           history.push('/page/success');
+           console.log("fin redirection !! ");
+        }
+        else {
+          alert (" tous les champ sont obligatoire !! ");
+        }
     }
-    const {id, name, mail, tel} = user;
+
+    const {id, name, mail, tel} = user; // destrctibg state !
     return (
         <Consumer>
                 { value => {
                     const {dispatch, contacts} = value; // destruct dispatch methode depuis le state du context !! 
                     return (
                         <div className="add-contact">
-                        <form action="" onSubmit={evt => addUser(user, dispatch , contacts,  evt)}>
+                        {/*  */}
+                        <form onSubmit={evt => addUser(user, dispatch , contacts,  evt)}> {/*  {evt => addUser(user, dispatch , contacts,  evt)}  */}
                         <div className="input-group">
                         <div className="input-group-prepend">
                             <button className="btn btn-success" type="submit">add contact</button>
@@ -72,6 +75,19 @@ function AddContact() {
 
         </Consumer>
     )
+}
+
+/*
+        id : 0,
+        name : "",
+        mail : "",
+        tel : "",
+*/
+
+AddContact.propTypes = { // NB ce ‘p’ est minuscule alors que 
+    name : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
+    mail : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
+    tel : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
 }
 
 export default AddContact
