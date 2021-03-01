@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Contact from "./Contact";
 import NavContact from "./NavContact";
 import AddContact from "./AddContact";
-import { Consumer } from "./contextContact"; /* et01 import consumer */
+import { Consumer} from "./contextContact"; /* et01 import consumer */
 import './Contact.scss'
 
 class Contacts extends Component {

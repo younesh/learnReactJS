@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import axios from "axios"
 
 const ContextContacts = React.createContext();  /* etap 00 :  en créer un context ! */
-
 const reducerContact = (state , action) => {
     switch ( action.type ) {
       case "DELETE_CONTACT" : 
@@ -16,32 +16,29 @@ const reducerContact = (state , action) => {
         return state;
     }
 }
+
 export  class ProviderContacts extends Component {  //  on enlvé le default car on v exporter plusieur chose ! 
     state = { /* etap 01 : copier le state contact ds le context ! ( avant le retour !  ) */
-        contacts :   [
-            { 
-              id : 1,
-              name : "maxyoooo",
-              mail : "Gyann@hotmail",
-              tel : 5623154652
-            },
-            { 
-              id : 2,  
-              name : "kevinneeee",
-              mail : "kglwn@firefo.com",
-              tel : 1232322132
-            },
-            { 
-              id : 3,
-              name : "maeikelouuu",
-              mail : "mmiki@gmail",
-              tel : 5623154652
-            },
-          ],
+        contacts : [],
           dispatch : (action) => {
              this.setState(state => reducerContact(state, action)); // il recevra un contact modifier
           } 
     }
+
+     // au chargelent du composant : en remplit le state contat depuis la Fake API jsonplaceholder !
+     componentWillMount() {
+      axios.get(globalVar.apiUsers)
+        .then(res => this.setState({ contacts : res.data }))
+        .catch(err => console.log(err));
+    }
+
+    /* async componentWillMount() {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users/");
+      console.log(res.json());
+     this.setState({ contacts : res.json() });
+    } */
+
+
     render() {
         return (
             <div> { /* etap 03 : Mise à disposition du status du context a ces children */}
@@ -54,3 +51,6 @@ export  class ProviderContacts extends Component {  //  on enlvé le default car
 }
 
 export  const Consumer = ContextContacts.Consumer;
+export const globalVar = {
+  apiUsers : "https://jsonplaceholder.typicode.com/users/"
+}

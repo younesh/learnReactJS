@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 /* et01 : en import un Consumer */
-import { Consumer } from "./contextContact"; 
+import { Consumer, globalVar  } from "./contextContact"; 
 import {Link} from "react-router-dom";
 import './Contact.scss'
+import axios from 'axios'
+
+
+
 class Contact extends React.Component {
 
     state = {
@@ -21,14 +25,18 @@ class Contact extends React.Component {
     }
     // function qui appelle le dispach qui modifira le state du context !!! 
     deleteClickChild (id, dispatch) {
-        console.log("deleteClickChild click ");
-        dispatch({
-            type : "DELETE_CONTACT",
-            payload : id
-        });
+        axios.delete(globalVar.apiUsers + id)
+        .then(res =>{
+            dispatch({
+                type : "DELETE_CONTACT",
+                payload : id
+            })
+          }
+        )
+        .catch(err => console.log(err))
     }
     render() {
-        const { id, name, mail , tel } = this.props.user; // atention !! >> props destructurée 
+        const { id, name, email , phone, username, website } = this.props.user; // atention !! >> props destructurée 
         const { showBlocInfo } = this.state;
         return (
             <Consumer>
@@ -39,8 +47,11 @@ class Contact extends React.Component {
                   <Link to={"/page/contact-detail/" + id }> <h3 onClick={this.showHideBlocInfo}> {name} </h3></Link>
                         {/* <div className={(showBlocInfo) ? "contact__info contact__info--open" : "contact__info" } > */}
                         <div className= {`contact__info  ${(showBlocInfo) ? "contact__info--open" : ""}`} >
-                            <p> {mail} </p>
-                            <p> {tel} </p>
+                        <p> Name : {id} {name}</p>
+                            <p> email : {email} </p>
+                            <p> username : {username} </p>
+                            <p> website : {website} </p>
+                            <p> phone : {phone} </p>
                         </div>
                         <button className="btn btn-danger" onClick={this.deleteClickChild.bind(this, id, dispatch)}> delette </button> {/* et01 */}
                     </div>
@@ -61,7 +72,7 @@ Contact.defaultProps = {
         id :  0,
         name : "defaultname",
         mail : "default@mail.com",
-        tel : "0000000",
+        phone : "0000000",
     }
 }
 

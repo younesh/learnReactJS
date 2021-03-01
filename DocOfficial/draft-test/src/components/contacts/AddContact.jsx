@@ -1,16 +1,17 @@
 import React , { useState} from 'react'
-import { Consumer } from "./contextContact"
+import { Consumer, globalVar } from "./contextContact"
 import PropTypes from 'prop-types'
 // 01 : import useHistory du  package react-router-dom 
 import { useHistory } from "react-router-dom"
+import axios  from "axios"
 
 function AddContact(props) {
 
     const [user, setUser] = useState({
         id : 0,
         name : null,
-        mail : "le mail",
-        tel : "le tel ",
+        email : "le email",
+        phone : "le phone ",
     });
 
 // 02 : en creer un objet history depuis useHistory
@@ -23,14 +24,18 @@ let history = useHistory();
 
     // au submition du form en ajoute le user du state local dans le state du context !
     const addUser = (newUser, dispatch,  contacts, e  ) => {
-        e.preventDefault(); 
+        e.preventDefault();
         newUser = {...newUser, id: contacts.length + 1 }
-        const {name,mail, tel  } = newUser
-        if (newUser!=="" && mail !=="" && tel !== "" ) {
-            dispatch({
-                type : "ADD_CONTACT",
-                payload : newUser
-            });
+        const {name,email, phone  } = newUser
+        if (name!=="" && email !=="" && phone !== "" ) {
+            axios.post(globalVar.apiUsers)
+                .then(e =>
+                 dispatch({
+                    type : "ADD_CONTACT",
+                    payload : newUser
+                }))
+                .catch(err => console.log(err))
+
            // this.props.history.push("/page/success");
            //  withRouter.history.push("/page/success");
            // 03 :  en execute notre redirection a la vollé !! 
@@ -42,7 +47,7 @@ let history = useHistory();
         }
     }
 
-    const {id, name, mail, tel} = user; // destrctibg state !
+    const {id, name, email, phone} = user; // destrctibg state !
     return (
         <Consumer>
                 { value => {
@@ -56,16 +61,16 @@ let history = useHistory();
                             <button className="btn btn-success" type="submit">add contact</button>
                         </div>
                          <input name="name" onChange={updateInput} defaultValue={name}  type="text" className="form-control" placeholder="name" aria-label="" aria-describedby="basic-addon1" />
-                         <input name="mail" onChange={updateInput}   defaultValue={mail} type="text" className="form-control" placeholder="mail" aria-label="" aria-describedby="basic-addon2" />
-                         <input name="tel" onChange={updateInput}    defaultValue={tel} type="text" className="form-control" placeholder="tel" aria-label="" aria-describedby="basic-addon3" />
+                         <input name="email" onChange={updateInput}   defaultValue={email} type="text" className="form-control" placeholder="email" aria-label="" aria-describedby="basic-addon2" />
+                         <input name="phone" onChange={updateInput}    defaultValue={phone} type="text" className="form-control" placeholder="phone" aria-label="" aria-describedby="basic-addon3" />
              
                         </div>
                         <code>
                             <ul>
                                 <li> id : {id} </li>
                                 <li> name : {name} </li>
-                                <li> mail : {mail} </li>
-                                <li> tel : {tel} </li>
+                                <li> email : {email} </li>
+                                <li> phone : {phone} </li>
                             </ul>
                         </code>
                         </form>
@@ -77,17 +82,10 @@ let history = useHistory();
     )
 }
 
-/*
-        id : 0,
-        name : "",
-        mail : "",
-        tel : "",
-*/
-
 AddContact.propTypes = { // NB ce ‘p’ est minuscule alors que 
     name : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
-    mail : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
-    tel : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
+    email : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
+    phone : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
 }
 
 export default AddContact
