@@ -1,11 +1,11 @@
-import React , { useState} from 'react'
+import React , { useState, useEffect} from 'react'
 import { Consumer, globalVar } from "./contextContact"
-import PropTypes from 'prop-types'
+
 // 01 : import useHistory du  package react-router-dom 
 import { useHistory } from "react-router-dom"
 import axios  from "axios"
 
-function AddContact(props) {
+function EditContact(props) {
 
     const [user, setUser] = useState({
         id : 0,
@@ -16,42 +16,49 @@ function AddContact(props) {
     });
 
 // 02 : en creer un objet history depuis useHistory
-let history = useHistory();
+     let history = useHistory();
 
     const updateInput = (e) => { // au onChange du input en maj le state !
         setUser({...user,  [e.target.name] : e.target.value});
     }
 
+    useEffect(()=>{
+        console.log(" EditContact >> useEffect ");
+        axios.get(globalVar.apiUsers + props.match.params.id )
+            .then ( res => {
+                setUser({
+                    id : res.data.id,
+                    name : res.data.name,
+                    email :  res.data.email,
+                    phone :  res.data.phone,
+                });
+            })
+    },[]); // le 2eme param [] tableau vide , executer useeffect une seule fois sans se soucier n'importe quel autre state
+    
     // au submition du form en ajoute le user du state local dans le state du context !
-    const addUser = (newUser, dispatch,  contacts, e) => {
-        console.log("before  e.preventDefault()" , e.target );
+    const EditUser = (newUser, dispatch,  contacts, e) => {
         e.preventDefault();
-        console.log("After  e.preventDefault()");
-   
-        const { name, email, phone } = newUser;
-        const postUser = {name, email, phone }
+        const { id, name, email, phone } = newUser;
+        const postUser = {id, name, email, phone }
 
         if (name && email && phone) {
-            axios.post(globalVar.apiUsers, postUser)
+            console.log(globalVar.apiUsers + props.match.params.id +" >>", newUser);
+            axios.put(globalVar.apiUsers + props.match.params.id , postUser)
                 .then(res => {
+                    console.log("res.data >> ", res.data);
                     dispatch({
-                        type : "ADD_CONTACT",
+                        type : "EDIT_CONTACT",
                         payload : res.data
                     })
                    setUser({name :"", email: "",phone :"", error : "" });
+                   history.push("/"); // r"edirection apres update ... 
                   }
                 )
                 .catch(err => {
-                    //console.log(err);
-                     setUser({...user, error : err.message })
+                     setUser({...user, error : err.message }) //  "AXIOS : " +
                 })
-
-           // 03 :  en execute notre redirection a la vollé !! 
-          // history.push('/page/success');
-           console.log("fin redirection !! ");
         }
         else {
-         // alert (" tous les champ sont obligatoire !! ");
           setUser({...user, error : " tous les champ sont obligatoire !!" })
         }
     }
@@ -63,11 +70,10 @@ let history = useHistory();
                     const {dispatch, contacts} = value; // destruct dispatch methode depuis le state du context !! 
                     return (
                         <div className="add-contact">
-                        {/*  */}
-                        <form onSubmit={addUser.bind(this, user, dispatch , contacts)} id="formAddUser"> {/*  {evt => addUser(user, dispatch , contacts,  evt)}  */}
+                        <form onSubmit={EditUser.bind(this, user, dispatch , contacts)} id="formAddUser"> {/*  {evt => addUser(user, dispatch , contacts,  evt)}  */}
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                <button className="btn btn-success" type="submit">add contact</button>
+                                <button className="btn btn-success" type="submit">Update ! </button>
                             </div>
                            <input name="name" onChange={updateInput} value={name} type="text" className="form-control" placeholder="name" aria-label="" aria-describedby="basic-addon1" />
                            <input name="email" onChange={updateInput} value={email} type="text" className="form-control" placeholder="email" aria-label="" aria-describedby="basic-addon2" />
@@ -76,15 +82,6 @@ let history = useHistory();
                         {(user.error) && (
                           <em className=" alert alert-danger d-block"> {user.error} </em>
                         )}
-
-                        <code>
-                            <ul>
-                                <li> id : {id} </li>
-                                <li> name : {name} </li>
-                                <li> email : {email} </li>
-                                <li> phone : {phone} </li>
-                            </ul>
-                        </code>
                         </form>
                     </div>
                     )
@@ -93,14 +90,9 @@ let history = useHistory();
         </Consumer>
     )
 }
+ 
 
-AddContact.propTypes = { // NB ce ‘p’ est minuscule alors que 
-    name : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
-    email : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
-    phone : PropTypes.string.isRequired,// NB alors que ce ‘P’ est en MAJISCULE
-}
-
-export default AddContact
+export default EditContact
 
 
  

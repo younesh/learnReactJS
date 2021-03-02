@@ -35,8 +35,9 @@ class Contact extends React.Component {
         )
         .catch(err => console.log(err))
     }
+
     render() {
-        const { id, name, email , phone, username, website } = this.props.user; // atention !! >> props destructurée 
+        const { id, name, email , phone, username, website} = this.props.user; // atention !! >> props destructurée 
         const { showBlocInfo } = this.state;
         return (
             <Consumer>
@@ -54,6 +55,7 @@ class Contact extends React.Component {
                             <p> phone : {phone} </p>
                         </div>
                         <button className="btn btn-danger" onClick={this.deleteClickChild.bind(this, id, dispatch)}> delette </button> {/* et01 */}
+                        <Link  className="btn btn-success"  to={`/update/${id}`}> Editer  </Link>
                     </div>
                     )
                 }}

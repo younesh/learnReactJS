@@ -2,6 +2,11 @@ import React from 'react'
  import { Consumer } from "../components/contacts/contextContact";
  
 function DetailContact( props ) {
+    const getParamURL = () => {
+        console.log("props.match.params.id !! "); // props.match.params.id
+        const allParam = props.match.params.id;
+        return  "props.match.params.id !! >> [" + allParam + "]";
+    }
     return (
         <Consumer>
             { value =>{
@@ -14,6 +19,7 @@ function DetailContact( props ) {
                         <p> username : {username} </p>
                         <p> website : {website} </p>
                         <p> phone : {phone} </p>
+                         logtest : {getParamURL()}
                     </div>
                 )
             }}

@@ -15,6 +15,7 @@ import SuccessAdd from "./pages/SuccessAdd";
 // 01 : importer la page 404
 import notFound from "./pages/notFound";
 import DetailContact from "./pages/DetailContact";
+import EditContact from "./components/contacts/EditContact";
 
 // import AnimeList from "./components/anime/AnimeList";
 
@@ -59,6 +60,7 @@ function App() {
             <Route exact path="/es6" component={TestES6} />
             <Route exact path="/page/about" component={About} />
             <Route exact path="/page/success" component={SuccessAdd} />
+            <Route exact path="/update/:id" component={EditContact} />
             <Route exact path="/page/contact-detail/:id/" component={DetailContact} />
 
             {/* 02 : ajouter la route 404 en dernier qui prend les url non définit avant et qui rederige vers la 404 ! */}
