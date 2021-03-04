@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+// 01 : 
+import { connect } from "react-redux";
+import { deleteContacts } from "../../actions/contactActions"
+
 class Contact extends Component {
   state = {
     showContactInfo: true
   };
 
+  // 03 :  en declanche la suppression qui est récupéré ds les propos
   onDeleteClick = id => {
-    //// DELETE CONTACT ////
+    this.props.deleteContacts(id);
   };
 
   render() {
@@ -60,4 +65,7 @@ Contact.propTypes = {
   contact: PropTypes.object.isRequired
 };
 
-export default Contact;
+// 02 : 
+export default connect(null, { deleteContacts })(Contact);
+/* comme il n a ya pas de mapStateToProps le 1er param sera null !, et le 2eme
+sera un objet qui contient les actions que le composant va declancher ! */
