@@ -3,7 +3,7 @@ import React from "react";
 class Clock extends React.Component {
   constructor(props) {
     // constructeur pour stocker le state local
-    super(props); // en passe tjrs les propos au constructeur de base
+    Super(props); // en passe tjrs les propos au constructeur de base
     this.state = { date: new Date() }; // en crée un state local où en passe la date désormais
   }
 

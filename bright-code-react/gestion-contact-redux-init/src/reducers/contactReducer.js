@@ -18,17 +18,11 @@ const initialState = {
           name: 'Walid IDBRAHIM',
           email: 'walid@gmail.com',
           phone: '0650303317'
-        },
-        {
-            id: 4,
-            name: 'macil',
-            email: 'macil@gmail.com',
-            phone: '888888'
-          }
+        }
       ]
 };
 
-export default function (state = initialState, action ) {
+const contactReducer = (state = initialState, action ) => {
     switch (action.type) {
         case "GET_CONTACTS": 
             return  {
@@ -41,4 +35,4 @@ export default function (state = initialState, action ) {
     }
 }; 
 
-// export default contactReducer;
+  export default contactReducer;

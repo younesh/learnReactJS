@@ -7,7 +7,7 @@ import "./App.scss";
 import  "./components/test01/Test01.scss";
 
 /* Clock :  test cycle de vie  */
-import Clock from "./components/Clock/Clock";
+//import Clock from "./components/Clock/Clock";
 import Contacts from "./components/contacts/Contacts";
 import TestES6 from "./components/testEs6/TestES6";
 import About from "./pages/About";

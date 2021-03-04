@@ -1,7 +1,9 @@
 import { createStore } from 'redux';
-import rootReducers from './reducers'; // 
+// rootReducers :   src/reducers/index.js qui regroupe tous les reducer
+import rootReducers from './reducers';
 
 const initialState = {};
-const store = createStore(rootReducers,initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() );
-
+const store = createStore(rootReducers,initialState,
+ // code pour avoir le debugage du redux dans les toolDev de chrome !
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 export default store;
