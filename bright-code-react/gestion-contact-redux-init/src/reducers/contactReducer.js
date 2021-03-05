@@ -29,6 +29,7 @@ const contactReducer = (state = initialState, action ) => {
                 ...state,
                 contacts : action.payload
             }
+            
         // 01
         case "DELETE_CONTACT": 
         return  {
