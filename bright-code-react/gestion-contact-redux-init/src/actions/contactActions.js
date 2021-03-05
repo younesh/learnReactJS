@@ -1,7 +1,20 @@
-export const getContacts = () => {
-  return {
-    type : "GET_CONTACTS"
-  }
+// 01 
+import axios from "axios";
+const apiUser = "https://jsonplaceholder.typicode.com/users/";
+
+export const getContacts =  () =>  async dispatch => {
+    try {
+        const res = await axios.get(apiUser);
+        console.log(apiUser);
+
+        dispatch ({
+          type : "GET_CONTACTS",
+          payload :res.data
+        })  
+
+    } catch (err) {
+        console.log("ERRO AXIOS : " , err);
+    }
 }
 
 export const deleteContacts = (id) => {
@@ -11,7 +24,6 @@ export const deleteContacts = (id) => {
     }
   }
 
-//01
   export const addContacts = (contact) => {
     return {
       type : "ADD_CONTACT",
