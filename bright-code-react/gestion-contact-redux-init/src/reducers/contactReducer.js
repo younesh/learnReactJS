@@ -34,6 +34,12 @@ const contactReducer = (state = initialState, action ) => {
             ...state ,
             contacts : state.contacts.filter(contact => contact.id !== action.payload)
         }
+        //02
+        case "ADD_CONTACT": 
+        return  {
+            ...state ,
+            contacts : [action.payload, ...state.contacts ]
+        }
         default :
             {
                 return state;

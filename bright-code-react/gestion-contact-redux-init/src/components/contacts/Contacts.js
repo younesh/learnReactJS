@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Contact from './Contact';
-import { connect } from 'react-redux';
 // 2 : 
+import { connect } from 'react-redux';
 import { getContacts } from '../../actions/contactActions';
 
 class Contacts extends Component {
