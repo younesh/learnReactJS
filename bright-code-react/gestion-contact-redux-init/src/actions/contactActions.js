@@ -7,18 +7,16 @@ export const getContacts =  () =>  async dispatch => {
     try {
         const res = await axios.get(apiUser);
         console.log(apiUser);
-
         dispatch ({
           type : "GET_CONTACTS",
           payload :res.data
-        })  
-
+        })
     } catch (err) {
         console.log("ERRO AXIOS : " , err);
     }
 }
 
-
+// 01 
 export const deleteContacts = (id) => async dispatch =>  {
     try {
         const res = await axios.delete(apiUser + id);
@@ -30,7 +28,19 @@ export const deleteContacts = (id) => async dispatch =>  {
     } catch (err) {
         console.log("ERRO AXIOS : " , err);
     }
-
+  }
+//01
+  export const findOneContact = (id) =>  async dispatch =>  {
+    try {
+        const res = await axios.get(apiUser + id);
+        dispatch ({
+            type : "GET_ONE_CONTACT",
+            payload : res.data
+          });
+    }
+    catch (err) {
+      console.log("ERRO AXIOS : " , err);
+    }
   }
 
   export const addContacts = (contact) => {
@@ -38,4 +48,13 @@ export const deleteContacts = (id) => async dispatch =>  {
       type : "ADD_CONTACT",
       payload : contact
     }
+  }
+
+  
+  export const updateContact = (contact) => async dispatch => {
+    const res = await axios.put(apiUser + contact.id ,contact);
+    dispatch ({
+      type : "UPDATE_CONTACT",
+      payload : res.data
+    })
   }

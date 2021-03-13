@@ -1,25 +1,8 @@
 
 const initialState = {
-    contacts: [
-        {
-          id: 1,
-          name: 'Mohamed IDBRAHIM',
-          email: 'idbrahimdev@gmail.com',
-          phone: '0650303315'
-        },
-        {
-          id: 2,
-          name: 'Basma IDBRAHIM',
-          email: 'basma@gmail.com',
-          phone: '0650303316'
-        },
-        {
-          id: 3,
-          name: 'Walid IDBRAHIM',
-          email: 'walid@gmail.com',
-          phone: '0650303317'
-        }
-      ]
+    contacts: [],
+    //01
+    contact: {}
 };
 
 const contactReducer = (state = initialState, action ) => {
@@ -29,23 +12,33 @@ const contactReducer = (state = initialState, action ) => {
                 ...state,
                 contacts : action.payload
             }
-            
-        // 01
         case "DELETE_CONTACT": 
         return  {
             ...state ,
             contacts : state.contacts.filter(contact => contact.id !== action.payload)
         }
-        //02
-        case "ADD_CONTACT": 
+        case "ADD_CONTACT":
         return  {
             ...state ,
             contacts : [action.payload, ...state.contacts ]
         }
+
+        case "GET_ONE_CONTACT" : 
+        console.log("GET_ONE_CONTACT >> ",  action.payload);
+        return {
+          ...state,
+          //02
+          contact : action.payload
+        }
+        case  "UPDATE_CONTACT" : 
+        return {
+         ...state,
+         contacts: state.contacts.map(contact => contact.id === action.payload.id ? action.payload : contact)
+        }
         default :
-            {
-                return state;
-            }
+        {
+            return state;
+        }
     }
 }; 
 
